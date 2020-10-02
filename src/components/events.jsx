@@ -29,9 +29,6 @@ class Events extends Component {
             questions.sort((a, b) => b.votes - a.votes);
             this.setState({questions});
         });
-
-        console.log(this.socket);
-
     }
 
     componentWillUnmount() {
