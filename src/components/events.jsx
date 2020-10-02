@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from "axios";
+import io from "socket.io-client";
 import QuestionForm from "./questionForm";
 import Questions from "./questions";
 
@@ -8,12 +9,24 @@ class Events extends Component {
         questions: []
     };
 
-    // urlApi = 'http://localhost:3000';
-    urlApi = 'https://api.originjump.com';
+    socket;
 
-    async componentDidMount() {
-        this.getQuestions();
-        setInterval(this.getQuestions, 3000);
+    urlApi = 'http://localhost:5000';
+    // urlApi = 'https://api.originjump.com';
+
+    async componentDidMount() { 
+        // this.getQuestions();
+        // setInterval(this.getQuestions, 3000);
+        
+        this.socket = io(this.urlApi);
+
+        const {id} = this.props.match.params;
+        this.socket.emit("join", {id, name: "dennis"}, (data) => {
+            this.setState({questions: data});
+        });
+
+        console.log(this.socket);
+
     }
 
     getQuestions = async () => {
