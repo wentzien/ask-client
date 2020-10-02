@@ -11,22 +11,23 @@ class Events extends Component {
 
     socket;
 
-    urlApi = 'http://localhost:5000';
-    // urlApi = 'https://api.originjump.com';
+    // urlApi = 'http://localhost:5000';
 
-    async componentDidMount() { 
-        
+    urlApi = 'https://api.originjump.com';
+
+    async componentDidMount() {
+
         this.socket = io(this.urlApi);
 
         const {id} = this.props.match.params;
         this.socket.emit("join", {id}, (data) => {
-                data.sort((a, b) => b.votes - a.votes);
-                this.setState({questions: data});
+            data.sort((a, b) => b.votes - a.votes);
+            this.setState({questions: data});
         });
 
         this.socket.on("questions", (questions) => {
-                questions.sort((a, b) => b.votes - a.votes);
-                this.setState({questions});
+            questions.sort((a, b) => b.votes - a.votes);
+            this.setState({questions});
         });
 
         console.log(this.socket);
@@ -45,16 +46,14 @@ class Events extends Component {
             event_id: eventId
         };
 
-        this.socket.emit("newQuestion", newQuestion);
+        // const questions = [...this.state.questions];
+        // newQuestion.id = response.data.insertId;
+        // newQuestion.event_id = eventId;
+        // newQuestion.votes = 0;
+        // questions.push(newQuestion);
+        // this.setState({questions});
 
-        // const response = await axios.post(this.urlApi + '/questions', newQuestion);
-        // if (response.status && response.status === 200) {
-        //     const questions = [...this.state.questions];
-        //     newQuestion.id = response.data.insertId;
-        //     newQuestion.votes = 0;
-        //     questions.push(newQuestion);
-        //     this.setState({questions});
-        // } else console.log('Die Frage konnte nicht verarbeitet werden.');
+        this.socket.emit("newQuestion", newQuestion);
     }
 
     voteQuestion = async (questionId) => {
@@ -64,9 +63,6 @@ class Events extends Component {
     handleVote = (question) => {
         if (localStorage.getItem(question.id)) return;
 
-        const response = this.voteQuestion(question.id);
-        if (response.status && !response.status !== 200) return
-
         let questions = [...this.state.questions];
         const index = questions.indexOf(question);
         question = {...questions[index]};
@@ -74,6 +70,8 @@ class Events extends Component {
         questions[index] = question;
         this.setState({questions});
         localStorage.setItem(question.id, true);
+
+        this.socket.emit("vote", question);
     }
 
     render() {
