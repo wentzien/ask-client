@@ -15,43 +15,46 @@ class Events extends Component {
     // urlApi = 'https://api.originjump.com';
 
     async componentDidMount() { 
-        // this.getQuestions();
-        // setInterval(this.getQuestions, 3000);
         
         this.socket = io(this.urlApi);
 
         const {id} = this.props.match.params;
-        this.socket.emit("join", {id, name: "dennis"}, (data) => {
-            this.setState({questions: data});
+        this.socket.emit("join", {id}, (data) => {
+                data.sort((a, b) => b.votes - a.votes);
+                this.setState({questions: data});
+        });
+
+        this.socket.on("questions", (questions) => {
+                questions.sort((a, b) => b.votes - a.votes);
+                this.setState({questions});
         });
 
         console.log(this.socket);
 
     }
 
-    getQuestions = async () => {
-        let response = await axios.get(this.urlApi + '/questions/' + this.props.match.params.id);
-        if (response.status && response.status === 200) {
-            const {data: questions} = response;
-            questions.sort((a, b) => b.votes - a.votes);
-            this.setState({questions});
-        } else console.log('Die Fragen des Events konnten nicht geladen werden.');
-    };
+    componentWillUnmount() {
+        this.socket.emit("disconnect");
+        this.socket.off();
+    }
 
     newQuestion = async (question) => {
         const {id: eventId} = this.props.match.params;
         const newQuestion = {
             question: question,
             event_id: eventId
-        }
-        const response = await axios.post(this.urlApi + '/questions', newQuestion);
-        if (response.status && response.status === 200) {
-            const questions = [...this.state.questions];
-            newQuestion.id = response.data.insertId;
-            newQuestion.votes = 0;
-            questions.push(newQuestion);
-            this.setState({questions});
-        } else console.log('Die Frage konnte nicht verarbeitet werden.');
+        };
+
+        this.socket.emit("newQuestion", newQuestion);
+
+        // const response = await axios.post(this.urlApi + '/questions', newQuestion);
+        // if (response.status && response.status === 200) {
+        //     const questions = [...this.state.questions];
+        //     newQuestion.id = response.data.insertId;
+        //     newQuestion.votes = 0;
+        //     questions.push(newQuestion);
+        //     this.setState({questions});
+        // } else console.log('Die Frage konnte nicht verarbeitet werden.');
     }
 
     voteQuestion = async (questionId) => {
