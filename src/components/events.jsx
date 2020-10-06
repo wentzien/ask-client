@@ -11,9 +11,9 @@ class Events extends Component {
 
     socket;
 
-    // urlApi = 'http://localhost:5000';
+    urlApi = 'http://localhost:5000';
 
-    urlApi = 'https://api.originjump.com';
+    // urlApi = 'https://api.originjump.com';
 
     async componentDidMount() {
 
@@ -51,6 +51,13 @@ class Events extends Component {
         // this.setState({questions});
 
         this.socket.emit("newQuestion", newQuestion);
+
+        this.socket.on("newQuestionResult", (result) => {
+            console.log(result);
+            localStorage.setItem("creator-" + result.insertId, true);
+        });
+
+
     }
 
     voteQuestion = async (questionId) => {
@@ -58,7 +65,7 @@ class Events extends Component {
     }
 
     handleVote = (question) => {
-        if (localStorage.getItem(question.id)) return;
+        if (localStorage.getItem("vote-" + question.id)) return;
 
         let questions = [...this.state.questions];
         const index = questions.indexOf(question);
@@ -66,9 +73,13 @@ class Events extends Component {
         question.votes++;
         questions[index] = question;
         this.setState({questions});
-        localStorage.setItem(question.id, true);
+        localStorage.setItem("vote-" + question.id, true);
 
         this.socket.emit("vote", question);
+    }
+
+    handleDelete = (question) => {
+        this.socket.emit("delete", question);
     }
 
     render() {
@@ -76,7 +87,8 @@ class Events extends Component {
         return (
             <div className="App">
                 <QuestionForm onSubmit={this.newQuestion}/>
-                <Questions questions={questions} onVote={this.handleVote}/>
+                <Questions questions={questions} onVote={this.handleVote}
+                           onDelete={this.handleDelete}/>
             </div>
         );
     }
