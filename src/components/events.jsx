@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from "axios";
 import io from "socket.io-client";
+import EventLink from "./eventLink";
 import QuestionForm from "./questionForm";
 import Questions from "./questions";
 
@@ -23,8 +24,8 @@ class Events extends Component {
         if (this.props.match.params.key) {
             const result = await axios.get(this.urlApi + "/events/" + id);
             console.log(result);
-            if (result.status === 200 && result.data[0].creator_key === this.props.match.params.key) {
-                this.setState({creator: true});
+            if (result.data[0]) {
+                if (result.data[0].creator_key === this.props.match.params.key) this.setState({creator: true});
             }
         }
 
@@ -94,11 +95,14 @@ class Events extends Component {
 
     render() {
         const {questions} = this.state;
+        const eventLink = this.state.creator ? <EventLink eventId={this.props.match.params.id}/> : "";
+
         return (
             <div className="App">
+                {eventLink}
                 <QuestionForm onSubmit={this.newQuestion}/>
                 <Questions questions={questions} onVote={this.handleVote}
-                           onDelete={this.handleDelete}/>
+                           onDelete={this.handleDelete} creator={this.state.creator}/>
             </div>
         );
     }
