@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 class EventLink extends Component {
-    urlApi = "https://originjump.com";
+    url = "https://ws.originjump.com";
 
     copyToClipboard = () => {
         // const input = this.input;
@@ -10,7 +10,7 @@ class EventLink extends Component {
 
         const input = document.createElement("input");
         document.body.appendChild(input);
-        input.value = this.urlApi + "/events/" + this.props.eventId;
+        input.value = this.url + "/events/" + this.props.eventId;
         input.select();
         document.execCommand("copy");
         document.body.removeChild(input);
