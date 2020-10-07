@@ -7,9 +7,9 @@ class Home extends Component {
         redirect: ""
     };
 
-    urlApi = "http://localhost:5000";
+    // urlApi = "http://localhost:5000";
 
-    // urlApi = "https://api.originjump.com";
+    urlApi = "https://api.originjump.com";
 
     handleNewEvent = async () => {
         const eventId = this.generateId();

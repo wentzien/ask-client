@@ -13,9 +13,9 @@ class Events extends Component {
 
     socket;
 
-    urlApi = 'http://localhost:5000';
+    // urlApi = 'http://localhost:5000';
 
-    // urlApi = 'https://api.originjump.com';
+    urlApi = 'https://api.originjump.com';
 
     async componentDidMount() {
 
