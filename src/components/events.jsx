@@ -6,7 +6,8 @@ import Questions from "./questions";
 
 class Events extends Component {
     state = {
-        questions: []
+        questions: [],
+        creator: false
     };
 
     socket;
@@ -17,9 +18,18 @@ class Events extends Component {
 
     async componentDidMount() {
 
+        const {id} = this.props.match.params;
+
+        if (this.props.match.params.key) {
+            const result = await axios.get(this.urlApi + "/events/" + id);
+            console.log(result);
+            if (result.status === 200 && result.data[0].creator_key === this.props.match.params.key) {
+                this.setState({creator: true});
+            }
+        }
+
         this.socket = io(this.urlApi);
 
-        const {id} = this.props.match.params;
         this.socket.emit("join", {id}, (data) => {
             data.sort((a, b) => b.votes - a.votes);
             this.setState({questions: data});
