@@ -28,21 +28,24 @@ class Question extends Component {
                     <div>
                         {data.question}
                     </div>
-                    <div className="mx-auto">
+                    <div style={{textAlign: "center"}}>
                         <span onClick={() => onVote(data)} style={{
                             cursor: "pointer",
-                            maxWidth: "50px",
-                        }}>{this.renderIconLike(data)} {data.votes} </span>
+                        }}
+                        title="Vote" data-placement="top" data-toggle="tooltip"
+                        >{this.renderIconLike(data)} {data.votes}</span>
                         <span onClick={() => onDelete(data)} style={{
                             cursor: "pointer",
-                            maxWidth: "50px",
-                            marginLeft: "10px"
-                        }}>{this.renderIconDelte(data)}</span>
+                            marginLeft: "20px"
+                        }}
+                        title="Delete" data-placement="top"
+                        >{this.renderIconDelte(data)}</span>
                         <span onClick={() => onAnswered(data)} style={{
                             cursor: "pointer",
-                            maxWidth: "50px",
-                            marginLeft: "10px"
-                        }}>{this.renderIconAnswered(data)}</span>
+                            marginLeft: "20px"
+                        }}
+                        title="Mark as answered" data-placement="top"
+                        >{this.renderIconAnswered(data)}</span>
 
                     </div>
                 </div>
