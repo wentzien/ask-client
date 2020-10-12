@@ -13,9 +13,9 @@ class Events extends Component {
 
     socket;
 
-    // urlApi = 'http://localhost:5000';
+    urlApi = 'http://localhost:5000';
 
-    urlApi = 'https://api.originjump.com';
+    // urlApi = 'https://api.originjump.com';
 
     async componentDidMount() {
 
@@ -93,16 +93,22 @@ class Events extends Component {
         this.socket.emit("delete", question);
     }
 
+    handleAnswered = (question) => {
+        this.socket.emit("answered", question);
+    }
+
     render() {
         const {questions} = this.state;
-        const eventLink = this.state.creator ? <EventLink eventId={this.props.match.params.id}/> : "";
+        const eventLink = this.state.creator ?
+            <EventLink eventId={this.props.match.params.id}/> : "";
 
         return (
             <div className="App">
                 {eventLink}
                 <QuestionForm onSubmit={this.newQuestion}/>
                 <Questions questions={questions} onVote={this.handleVote}
-                           onDelete={this.handleDelete} creator={this.state.creator}/>
+                           onDelete={this.handleDelete} creator={this.state.creator}
+                           onAnswered={this.handleAnswered}/>
             </div>
         );
     }

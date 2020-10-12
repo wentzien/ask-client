@@ -3,7 +3,7 @@ import Question from "./question";
 
 class Questions extends Component {
     render() {
-        const {questions, onVote, onDelete, creator} = this.props;
+        const {questions, onVote, onDelete, creator, onAnswered} = this.props;
         return questions.map(q =>
                     <Question
                         key={q.id}
@@ -11,6 +11,7 @@ class Questions extends Component {
                         onVote={onVote}
                         onDelete={onDelete}
                         creator={creator}
+                        onAnswered={onAnswered}
                     />
         );
     }

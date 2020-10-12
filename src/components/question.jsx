@@ -13,10 +13,17 @@ class Question extends Component {
         return "";
     }
 
+    renderIconAnswered = (question) => {
+        if (this.props.creator) return <i className="fa fa-check"/>;
+        return "";
+    }
+
     render() {
-        const {data, onVote, onDelete, creator} = this.props;
-        return (
-            <div className="card">
+        const {data, onVote, onDelete, onAnswered} = this.props;
+        const cardClass = data.answered ? "card text-white bg-success" : "card";
+
+            return (
+            <div className={cardClass}>
                 <div className="card-body">
                     <div>
                         {data.question}
@@ -29,7 +36,13 @@ class Question extends Component {
                         <span onClick={() => onDelete(data)} style={{
                             cursor: "pointer",
                             maxWidth: "50px",
+                            marginLeft: "10px"
                         }}>{this.renderIconDelte(data)}</span>
+                        <span onClick={() => onAnswered(data)} style={{
+                            cursor: "pointer",
+                            maxWidth: "50px",
+                            marginLeft: "10px"
+                        }}>{this.renderIconAnswered(data)}</span>
 
                     </div>
                 </div>
