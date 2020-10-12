@@ -37,7 +37,7 @@ class Events extends Component {
         });
 
         this.socket.on("questions", (questions) => {
-            questions.sort((a, b) => b.votes - a.votes);
+            questions.sort((a, b) => a.answered - b.answered || b.votes - a.votes);
             this.setState({questions});
         });
     }
