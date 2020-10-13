@@ -4,6 +4,7 @@ import io from "socket.io-client";
 import EventLink from "./eventLink";
 import QuestionForm from "./questionForm";
 import Questions from "./questions";
+import Footer from "./footer";
 
 class Events extends Component {
     state = {
@@ -109,6 +110,7 @@ class Events extends Component {
                 <Questions questions={questions} onVote={this.handleVote}
                            onDelete={this.handleDelete} creator={this.state.creator}
                            onAnswered={this.handleAnswered}/>
+                           <Footer />
             </div>
         );
     }

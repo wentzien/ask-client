@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import axios from 'axios';
+import Footer from "./footer";
 
 class Home extends Component {
     state = {
@@ -40,14 +41,18 @@ class Home extends Component {
     render() {
         const {redirect} = this.state;
         return (
-            <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                <button style={{
-                    width: "700px",
-                    marginTop: "50px"
-                }} className="btn btn-primary" onClick={this.handleNewEvent}>Neues Event
-                </button>
-                {redirect ? (<Redirect to={redirect}/>) : ''}
-            </div>
+            <React.Fragment>
+                <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                    <button style={{
+                        width: "700px",
+                        marginTop: "50px"
+                    }} className="btn btn-primary" onClick={this.handleNewEvent}>Neues Event
+                    </button>
+                    {redirect ? (<Redirect to={redirect}/>) : ''}
+                </div>
+                <Footer/>
+            </React.Fragment>
+
         );
     }
 }
