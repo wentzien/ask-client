@@ -10,10 +10,10 @@ class App extends Component {
         return (
             <div>
                 <Switch>
-                    <Route exact path="/events/:id/:key" component={Events}/>
-                    <Route exact path="/events/:id" component={Events}/>
-                    <Route exact path="/admin" component={ManageEvents}/>
-                    <Route exact path="/404" component={NotFound}/>
+                    <Route path="/events/:id/:key" component={Events}/>
+                    <Route path="/events/:id" component={Events}/>
+                    <Route path="/admin" component={ManageEvents}/>
+                    <Route path="/404" component={NotFound}/>
                     <Route exact path="/" component={Home}/>
                     <Route exact path="/*">
                         <Redirect to="/404"/>
