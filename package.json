@@ -1,6 +1,7 @@
 {
   "name": "questions",
   "version": "0.1.0",
+  "homepage": "/questions",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
