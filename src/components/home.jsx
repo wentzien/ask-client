@@ -8,9 +8,8 @@ class Home extends Component {
         redirect: ""
     };
 
-    // urlApi = "http://localhost:5000";
-
-    urlApi = "https://api.originjump.com";
+    urlApi = process.env.REACT_APP_APIURL;
+    sub = process.env.REACT_APP_SUBDIRECTORIES;
 
     handleNewEvent = async () => {
         const eventId = this.generateId();
@@ -24,7 +23,7 @@ class Home extends Component {
         const result = await axios.post(this.urlApi + "/events", event);
         console.log(result);
         if (result.data.serverStatus === 2) {
-            this.setState({redirect: "/events/" + eventId + "/" + eventKey});
+            this.setState({redirect: this.sub + "/events/" + eventId + "/" + eventKey});
         } else console.log("Event konnte nicht erstellt werden.");
     };
 

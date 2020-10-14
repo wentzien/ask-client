@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 class EventLink extends Component {
-    url = "https://ws.originjump.com";
+    url = process.env.REACT_APP_URL + process.env.REACT_APP_SUBDIRECTORIES;
 
     copyToClipboard = () => {
         // const input = this.input;
