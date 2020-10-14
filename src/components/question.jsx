@@ -8,7 +8,7 @@ class Question extends Component {
     }
 
     renderIconDelte = (question) => {
-        if (localStorage.getItem("creator-" + question.id) || this.props.creator) return <i
+        if ((localStorage.getItem("creator-" + question.id) && question.answered === 0) || this.props.creator) return <i
             className="fa fa-trash"/>;
         return "";
     }
