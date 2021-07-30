@@ -14,7 +14,7 @@ class Events extends Component {
 
     socket;
 
-    urlApi = process.env.REACT_APP_APIURL;
+    urlApi = process.env.REACT_APP_API_URL;
 
     async componentDidMount() {
 

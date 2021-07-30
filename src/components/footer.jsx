@@ -5,7 +5,7 @@ class Footer extends Component {
         return (
             <footer className="footer" style={{marginTop: "50px"}}>
                 <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                    <a href="https://www.hs-pforzheim.de/kontakt/impressum">Impressum</a>
+                    <a href="#">Impressum</a>
                 </div>
             </footer>
         );

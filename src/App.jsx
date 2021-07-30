@@ -6,7 +6,7 @@ import Home from "./components/home";
 
 class App extends Component {
     render() {
-        const sub = process.env.REACT_APP_SUBDIRECTORIES;
+        const sub = process.env.REACT_APP_URL_SUBPATH;
         return (
             <div>
                 <Switch>

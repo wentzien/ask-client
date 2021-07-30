@@ -4,13 +4,14 @@ WORKDIR /app
 
 ENV PORT 80
 
-COPY package.json ./
+COPY package.json.old ./
 
 RUN npm install
 
 COPY . .
 
-ARG arg_port=80
-ENV port=${port}
+ENV PORT=80;
+ENV API_ENDPOINT;
+
 
 CMD  ["node", "server.js"]

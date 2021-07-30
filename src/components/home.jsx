@@ -8,8 +8,8 @@ class Home extends Component {
         redirect: ""
     };
 
-    urlApi = process.env.REACT_APP_APIURL;
-    sub = process.env.REACT_APP_SUBDIRECTORIES;
+    urlApi = process.env.REACT_APP_API_URL;
+    sub = process.env.REACT_APP_URL_SUBPATH;
 
     handleNewEvent = async () => {
         const eventId = this.generateId();

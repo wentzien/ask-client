@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 class EventLink extends Component {
-    url = process.env.REACT_APP_URL + process.env.REACT_APP_SUBDIRECTORIES;
+    url = process.env.REACT_APP_URL + process.env.REACT_APP_URL_SUBPATH;
 
     copyToClipboard = () => {
         // const input = this.input;
