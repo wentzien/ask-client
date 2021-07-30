@@ -10,4 +10,7 @@ RUN npm install
 
 COPY . .
 
+ARG arg_port=80
+ENV port=${port}
+
 CMD  ["node", "server.js"]
