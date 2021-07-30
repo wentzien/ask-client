@@ -10,7 +10,7 @@ RUN npm install
 
 COPY . .
 
-RUN npm build
+RUN npm run build
 
 ENV PORT="80"
 ENV REACT_APP_URL="http://localhost:3000"
