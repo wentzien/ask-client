@@ -10,8 +10,11 @@ RUN npm install
 
 COPY . .
 
-ENV PORT=80;
-ENV API_ENDPOINT;
+RUN npm build
 
+ENV PORT=80;
+ENV REACT_APP_URL;
+ENV REACT_APP_URL_SUBPATH=""
+ENV REACT_APP_API_URL;
 
 CMD  ["node", "server.js"]
