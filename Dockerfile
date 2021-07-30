@@ -4,7 +4,7 @@ WORKDIR /app
 
 ENV PORT 80
 
-COPY package.json.old ./
+COPY package.json ./
 
 RUN npm install
 
@@ -12,9 +12,9 @@ COPY . .
 
 RUN npm build
 
-ENV PORT=80;
-ENV REACT_APP_URL;
+ENV PORT="80"
+ENV REACT_APP_URL="http://localhost:3000"
 ENV REACT_APP_URL_SUBPATH=""
-ENV REACT_APP_API_URL;
+ENV REACT_APP_API_URL="http://localhost:4000"
 
 CMD  ["node", "server.js"]
