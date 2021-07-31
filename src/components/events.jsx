@@ -22,7 +22,6 @@ class Events extends Component {
 
         if (this.props.match.params.key) {
             const result = await axios.get(this.urlApi + "/events/" + id);
-            console.log(result);
             if (result.data[0]) {
                 if (result.data[0].creator_key === this.props.match.params.key) this.setState({creator: true});
             }
@@ -63,7 +62,6 @@ class Events extends Component {
         this.socket.emit("newQuestion", newQuestion);
 
         this.socket.on("newQuestionResult", (result) => {
-            console.log(result);
             localStorage.setItem("creator-" + result.insertId, true);
         });
 

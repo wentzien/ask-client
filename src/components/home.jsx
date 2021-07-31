@@ -21,7 +21,6 @@ class Home extends Component {
         };
 
         const result = await axios.post(this.urlApi + "/events", event);
-        console.log(result);
         if (result.data.serverStatus === 2) {
             this.setState({redirect: this.sub + "/events/" + eventId + "/" + eventKey});
         } else console.log("Event konnte nicht erstellt werden.");
